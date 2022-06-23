@@ -14,7 +14,7 @@ $logout = ($_SERVER["REQUEST_METHOD"] == "GET" && !empty( $_GET['logout']) ) ? t
 
 if($_SESSION){
     if(Usuario::barrarUsuario()){
-        header('Location: http://localhost/uec/?pagina=0');
+        header('Location: ../?pagina=0');
     }
 }
 
@@ -23,12 +23,12 @@ if($tela == 'cadastroDeUsuario'){
     $resultado = $usuarioObj->buscarPorEmail( $usuarioObj->getEmail() );
     //Se existir o email cadastrado no bd ele não deve ser gravado
     if( $resultado ){
-        header('Location: http://localhost/uec/?pagina=2&alert=3');
+        header('Location: ?pagina=2&alert=3');
     } else {
         if( $usuarioObj->cadastrar()  ){
-            header('Location: http://localhost/uec/?pagina=2&alert=1');
+            header('Location: ?pagina=2&alert=1');
         }else{
-            header('Location: http://localhost/uec/?pagina=2&alert=2');
+            header('Location: ?pagina=2&alert=2');
         }
     }
 }
@@ -38,19 +38,19 @@ if( $tela == 'loginDoUsuario' ){
     $usuarioObj = new Usuario($email, $senha);
     if( $usuarioObj->verificarLogin() ){
         $_SESSION["usuarioLogado"] = true;
-        header('Location: http://localhost/uec/?pagina=2');
+        header('Location: ../?pagina=2');
     }
 }
 // Verifica edição do usuário
 if( $tela == 'editarUsuario' ){
     $usuarioObj = new Usuario($email, $senha);
     $usuarioObj->editar($idUsuario);
-    header('Location: http://localhost/uec/?pagina=2&alert=1');
+    header('Location: ../?pagina=2&alert=1');
 }
 
 // Verifica da busca do usuario
 if( $tela == 'buscarUsuario' ){
-    header("Location: http://localhost/uec/?pagina=2&termo=$BuscaUsuario");
+    header("Location: ../?pagina=2&termo=$BuscaUsuario");
 }
 
 if(!$tela){
@@ -59,11 +59,11 @@ if(!$tela){
         $usuario = $usuarioObj->buscarPorId($id);
         if($pagina == 4){
             $usuarioObj->deletar($id);
-            header('Location: http://localhost/uec/?pagina=2');
+            header('Location: ?pagina=2');
         }
     }else if($logout){
         $_SESSION['usuarioLogado'] = false;
-        header('Location: http://localhost/uec/?pagina=0');
+        header('Location: ?pagina=0');
     }else{
         //Quando não temos post mas temos um termo via get
         if( $termoBusca ){

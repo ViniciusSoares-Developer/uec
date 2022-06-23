@@ -224,12 +224,16 @@ class Lutador
     }
 
     public function buscarId($id){
-        $pdo = Database::conexao();
         $sql = "SELECT * FROM lutador WHERE `id` = $id";
+        $pdo = Database::conexao();
         $stmt = $pdo->prepare($sql);
-        $list = $stmt->execute();
+        $stmt->execute();
         $list = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $list[0]; 
+        if($list){
+            return $list[0];
+        }else{
+            return ["nome"=>"Inexistente"];
+        }
     }
 
     public function buscarPorNome($nome){

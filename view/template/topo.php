@@ -32,13 +32,16 @@
               <li class="nav-item">
                 <a class="nav-link" href="?pagina=2">Lista de Usuário</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="?pagina=1">Cadastro de Lutador</a>
               <li class="nav-item top-0 end-0 position-absolute">
                 <a class="nav-link" href="?pagina=4&logout=true"><button type="button" class="btn btn-danger">Deslogar</button></a>
               </li>
+              <?php endif; ?>
+              <li class="nav-item">
+                <a class="nav-link" href="?pagina=1">Lutadores</a>
               </li>
-            <?php endif; ?>
+            <li class="nav-item">
+              <a class="nav-link" href="?pagina=8">Lutas</a>
+            </li>
           </ul>
         </div>
       </div>

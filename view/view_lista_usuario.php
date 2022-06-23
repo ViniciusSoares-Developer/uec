@@ -1,5 +1,10 @@
 <main>
     <h1>Lista de Usuários</h1>
+    <div class="row mb-3">
+        <button type="button" class="col btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+            Adicionar Usuario
+        </button>
+    </div>
     <?php if($alert == '1'):?>
         <div class="row col-md-6">
             <div class="alert alert-success alert-dismissible fade show">

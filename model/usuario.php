@@ -125,6 +125,6 @@ class Usuario
 
     public static function barrarUsuario(){
         //se o usuario estiver logado e a sessao nao for vazia permita o acesso, senao bloquei o acesso
-        return ($_SESSION['usuarioLogado'] == true && !empty($_SESSION['usuarioLogado'])) ? false : true;
+        return ($_SESSION['usuarioLogado'] === true && !empty($_SESSION['usuarioLogado'])) ? false : true;
     }
 }
