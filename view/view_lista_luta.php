@@ -14,20 +14,29 @@
             <th></th>
             <th>Desafiado</th>
             <th>Data da luta</th>
-            <th>Vitoria</th>
-            <th>Deletar</th>
+            <th>Detalhes</th>
+            <?php if($_SESSION['usuarioLogado'] === true):?>
+                <th>Deletar</th>
+            <?php endif?>
         </tr>
         <?php
         $cont = 0;
         foreach($listaLuta as $luta): $cont++?>
             <tr>
                 <td><?=$cont?></td>
-                <td><?=$lutadorOBJ->buscarId($luta['id_desafiante'])['nome']?></td>
+                <td><?=$luta['desafiante']?></td>
                 <td>X</td>
-                <td><?=$lutadorOBJ->buscarId($luta['id_desafiado'])['nome']?></td>
+                <td><?=$luta['desafiado']?></td>
                 <td><?=$luta['dataLuta']?></td>
-                <td><?=$lutadorOBJ->buscarId($luta['id_vitoria'])['nome']?></td>
+                <td>
+                    <?php if($luta['nomeVencedor'] != null):?>
+                        <span class="vitoria">Vitoria: <?=$luta['nomeVencedor']?></span><br>
+                        <span class="derrota">Derrota: <?=$luta['nomePerdedor']?></span>
+                    <?php endif;?>
+                </td>
+                <?php if($_SESSION['usuarioLogado'] === true):?>
                 <td><a href="?pagina=9&id=<?=$luta['id']?>"><button class="btn btn-primary">Deletar</button></a></td>
+                <?php endif;?>
             </tr>
         <?php endforeach;?>
     </table>

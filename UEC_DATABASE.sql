@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23-Jun-2022 às 17:25
+-- Tempo de geração: 28-Jun-2022 às 20:19
 -- Versão do servidor: 10.4.22-MariaDB
 -- versão do PHP: 8.1.2
 
@@ -31,11 +31,11 @@ USE `uec`;
 
 CREATE TABLE `luta` (
   `id` int(11) NOT NULL,
-  `id_desafiante` int(11) NOT NULL,
-  `id_desafiado` int(11) NOT NULL,
-  `rounds` int(11) NOT NULL,
-  `id_vitoria` int(11) NOT NULL,
-  `id_derrota` int(11) NOT NULL,
+  `idDesafiante` int(11) NOT NULL,
+  `idDesafiado` int(11) NOT NULL,
+  `nomeVencedor` varchar(255) DEFAULT NULL,
+  `nomePerdedor` varchar(255) DEFAULT NULL,
+  `rounds` tinyint(4) NOT NULL,
   `dataLuta` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -79,7 +79,9 @@ CREATE TABLE `usuario` (
 -- Índices para tabela `luta`
 --
 ALTER TABLE `luta`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FG_Desafiante` (`idDesafiante`),
+  ADD KEY `FG_Desafiado` (`idDesafiado`);
 
 --
 -- Índices para tabela `lutador`
@@ -114,6 +116,17 @@ ALTER TABLE `lutador`
 --
 ALTER TABLE `usuario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `luta`
+--
+ALTER TABLE `luta`
+  ADD CONSTRAINT `FG_Desafiado` FOREIGN KEY (`idDesafiado`) REFERENCES `lutador` (`id`),
+  ADD CONSTRAINT `FG_Desafiante` FOREIGN KEY (`idDesafiante`) REFERENCES `lutador` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

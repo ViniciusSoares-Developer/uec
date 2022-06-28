@@ -1,6 +1,16 @@
 table, th, td{
     border: 1px solid white;
     color: white!important;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.vitoria{
+    font-size: 20px;
+    text-decoration: underline;
+    text-decoration-color: green;
+}
+.derrota{
+    font-size: 13px;
 }
 
 body{

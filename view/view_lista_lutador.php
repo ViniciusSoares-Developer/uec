@@ -35,7 +35,7 @@
         <?php endif; ?>
         <table class="table table-striped">
             <tr>
-                <th>Id</th>
+                <th></th>
                 <th>Nome</th>
                 <th>Nacionalidade</th>
                 <th>Categoria</th>
@@ -45,20 +45,18 @@
                 <th>Vitoria</th>
                 <th>Derrota</th>
                 <th>Empate</th>
-                <th>Data de Registro</th>
-                <th>Editar</th>
-                <th>Apagar</th>
+                <?php if ($_SESSION['usuarioLogado'] === true) : ?>
+                    <th>Data de Registro</th>
+                    <th>Editar</th>
+                    <th>Apagar</th>
+                <?php endif; ?>
             </tr>
             <?php
             $cont = 0;
             foreach ($listaLutadores as $lutador) : $cont++ ?>
                 <tr>
                     <td><?= $cont ?></td>
-                    <td>
-                        <a href="?pagina=6&id=<?= $usuario['id'] ?>">
-                            <?= $lutador['nome'] ?>
-                        </a>
-                    </td>
+                    <td><?= $lutador['nome'] ?></td>
                     <td><?= $lutador['nacionalidade'] ?></td>
                     <td><?= $lutador['categoria'] ?></td>
                     <td><?= $lutador['idade'] ?></td>
@@ -67,13 +65,15 @@
                     <td><?= $lutador['vitorias'] ?></td>
                     <td><?= $lutador['derrotas'] ?></td>
                     <td><?= $lutador['empates'] ?></td>
-                    <td><?= $lutador['dataRegistro'] ?></td>
-                    <td>
-                        <a href="?pagina=6&id=<?= $lutador['id'] ?>" class="btn btn-light btn-sm">Editar</a>
-                    </td>
-                    <td>
-                        <a href="?pagina=7&id=<?= $lutador['id'] ?>" class="btn btn-light btn-sm">Apagar</a>
-                    </td>
+                    <?php if ($_SESSION['usuarioLogado'] === true) : ?>
+                        <td><?= $lutador['dataRegistro'] ?></td>
+                        <td>
+                            <a href="?pagina=6&id=<?= $lutador['id'] ?>" class="btn btn-light btn-sm">Editar</a>
+                        </td>
+                        <td>
+                            <a href="?pagina=7&id=<?= $lutador['id'] ?>" class="btn btn-light btn-sm">Apagar</a>
+                        </td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach ?>
         </table>

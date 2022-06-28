@@ -33,7 +33,7 @@ else{
                     ($dataLuta['month'] - $dataAtual['month']) < 1 &&
                     ($dataLuta['day'] - $dataAtual['day']) < 1
                 ){
-                    $lutaLutadores = new Luta($luta['id_desafiante'], $luta['id_desafiado'], $luta['rounds'], null);
+                    $lutaLutadores = new Luta($luta['idDesafiante'], $luta['idDesafiado'], $luta['rounds'], null);
                     $lutaLutadores->lutar($luta['id']);
                 }
             }
