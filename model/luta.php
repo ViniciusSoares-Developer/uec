@@ -146,21 +146,22 @@ class Luta
 
             for ($i = 1; $i <= $this->getRounds(); $i++) {
                 $random = rand(0, 5);
-                if ($random < 2) {
-                    $stmt->bindValue(':nomeVitoria', $this->getDesafiante()['nome']);
-                    $stmt->bindValue(':nomeDerrota', $this->getDesafiado()['nome']);
-                    $stmt->bindValue(':idVitoria', intval($this->getDesafiante()['id']));
-                    $stmt->bindValue(':idDerrota', intval($this->getDesafiado()['id']));
-                } else if ($random > 2) {
-                    $stmt = $pdo->prepare($sqlEmpate);
-                    $stmt->bindValue(':idDerrota', intval($this->getDesafiante()['id']));
-                    $stmt->bindValue(':idVitoria', intval($this->getDesafiado()['id']));
-                    
-                } else {
-                    $stmt->bindValue(':nomeDerrota', $this->getDesafiante()['nome']);
-                    $stmt->bindValue(':nomeVitoria', $this->getDesafiado()['nome']);
-                    $stmt->bindValue(':idDerrota', intval($this->getDesafiante()['id']));
-                    $stmt->bindValue(':idVitoria', intval($this->getDesafiado()['id']));
+                if($i == $this->getRounds()){
+                    if ($random <= 2) {
+                        $stmt->bindValue(':nomeVitoria', $this->getDesafiante()['nome']);
+                        $stmt->bindValue(':nomeDerrota', $this->getDesafiado()['nome']);
+                        $stmt->bindValue(':idVitoria', intval($this->getDesafiante()['id']));
+                        $stmt->bindValue(':idDerrota', intval($this->getDesafiado()['id']));
+                    } else if ($random <= 3) {
+                        $stmt = $pdo->prepare($sqlEmpate);
+                        $stmt->bindValue(':idDerrota', intval($this->getDesafiante()['id']));
+                        $stmt->bindValue(':idVitoria', intval($this->getDesafiado()['id']));
+                    } else {
+                        $stmt->bindValue(':nomeDerrota', $this->getDesafiante()['nome']);
+                        $stmt->bindValue(':nomeVitoria', $this->getDesafiado()['nome']);
+                        $stmt->bindValue(':idDerrota', intval($this->getDesafiante()['id']));
+                        $stmt->bindValue(':idVitoria', intval($this->getDesafiado()['id']));
+                    }
                 }
             }
             $stmt->execute();
